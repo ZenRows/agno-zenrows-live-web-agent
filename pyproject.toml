@@ -1,0 +1,39 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agno-zenrows-live-web-agent"
+version = "0.1.0"
+description = "A two-agent Agno workflow that retrieves protected web data through Zenrows."
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+  "agno==3.0.10",
+  "beautifulsoup4==4.14.2",
+  "openai==3.16.2",
+  "pydantic==2.12.5",
+  "python-dotenv==1.2.1",
+  "requests==2.32.5",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest==9.0.2",
+  "pytest-cov==7.0.0",
+  "ruff==0.15.6",
+]
+
+[project.scripts]
+live-web-agent = "live_web_agent.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/live_web_agent"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
